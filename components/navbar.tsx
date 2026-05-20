@@ -12,7 +12,7 @@ interface NavLink {
   id: string;
 }
 
-export default function Navbar({ isScrolled }: NavbarProps): JSX.Element {
+export default function Navbar({ isScrolled }: NavbarProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   // ✅ Default Home active

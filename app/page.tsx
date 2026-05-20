@@ -10,7 +10,7 @@ import Testimonials from "@/components/testimonials";
 import Contact from "@/components/contact";
 import Footer from "@/components/footer";
 
-export default function Home(): JSX.Element {
+export default function Home() {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
 
   useEffect(() => {

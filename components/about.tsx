@@ -8,7 +8,7 @@ interface Skill {
   description: string;
 }
 
-export default function About(): JSX.Element {
+export default function About() {
   const skills: Skill[] = [
     {
       icon: Lightbulb,

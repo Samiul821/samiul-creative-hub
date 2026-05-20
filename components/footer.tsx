@@ -19,7 +19,7 @@ interface QuickLink {
   href: string;
 }
 
-export default function Footer(): JSX.Element {
+export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const socialLinks: SocialLink[] = [

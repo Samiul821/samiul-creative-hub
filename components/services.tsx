@@ -9,7 +9,7 @@ interface Service {
   points: string[];
 }
 
-export default function Services(): JSX.Element {
+export default function Services() {
   const services: Service[] = [
     {
       icon: Share2,

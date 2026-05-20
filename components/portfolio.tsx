@@ -10,7 +10,7 @@ interface Project {
   color: string;
 }
 
-export default function Portfolio(): JSX.Element {
+export default function Portfolio() {
   const projects: Project[] = [
     {
       title: 'Instagram Growth Campaign',

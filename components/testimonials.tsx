@@ -14,7 +14,7 @@ interface Stat {
   value: string;
 }
 
-export default function Testimonials(): JSX.Element {
+export default function Testimonials() {
   const testimonials: Testimonial[] = [
     {
       name: 'Sarah Johnson',

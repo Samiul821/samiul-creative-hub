@@ -13,7 +13,7 @@ interface SocialLink {
   label: string;
 }
 
-export default function Hero(): JSX.Element {
+export default function Hero() {
   const roles: string[] = [
     "Social Media Manager",
     "Digital Marketer",
