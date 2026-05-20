@@ -3,14 +3,14 @@
 import { useState, useEffect } from "react";
 import { CiFacebook, CiInstagram, CiLinkedin } from "react-icons/ci";
 import { FaEnvelope, FaArrowRight } from "react-icons/fa";
-
 import type { IconType } from "react-icons";
 import Image from "next/image";
 
 interface SocialLink {
   icon: IconType;
-  href: string;
+  href?: string;
   label: string;
+  onClick?: () => void;
 }
 
 export default function Hero() {
@@ -20,6 +20,7 @@ export default function Hero() {
     "Content Creator",
     "Ads Specialist",
   ];
+
   const [currentRole, setCurrentRole] = useState<number>(0);
 
   useEffect(() => {
@@ -28,6 +29,19 @@ export default function Hero() {
     }, 3000);
     return () => clearInterval(interval);
   }, []);
+
+  // ✅ Smart Email handler
+  const handleEmailClick = () => {
+    const email = "support.samiul.islam@gmail.com";
+
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    const url = isMobile
+      ? `mailto:${email}`
+      : `https://mail.google.com/mail/?view=cm&fs=1&to=${email}`;
+
+    window.open(url, "_blank");
+  };
 
   const socialLinks: SocialLink[] = [
     {
@@ -47,8 +61,8 @@ export default function Hero() {
     },
     {
       icon: FaEnvelope,
-      href: "mailto:support.samiul.islam@gmail.com",
       label: "Email",
+      onClick: handleEmailClick,
     },
   ];
 
@@ -84,11 +98,11 @@ export default function Hero() {
             </button>
 
             <button
-              onClick={() => {
+              onClick={() =>
                 document
                   .getElementById("portfolio")
-                  ?.scrollIntoView({ behavior: "smooth" });
-              }}
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
               className="px-8 py-4 rounded-xl font-semibold text-primary border-2 border-primary hover:bg-primary/10 transition-all duration-300"
             >
               View Portfolio
@@ -96,9 +110,23 @@ export default function Hero() {
           </div>
 
           {/* Social */}
-               <div className="flex gap-6">
+          <div className="flex gap-6">
             {socialLinks.map((social) => {
               const Icon = social.icon;
+
+              if (social.onClick) {
+                return (
+                  <button
+                    key={social.label}
+                    onClick={social.onClick}
+                    className="glass glass-hover p-3 rounded-lg text-primary hover:text-secondary transition-colors float"
+                    title={social.label}
+                  >
+                    <Icon size={24} />
+                  </button>
+                );
+              }
+
               return (
                 <a
                   key={social.label}
@@ -116,7 +144,7 @@ export default function Hero() {
         </div>
 
         {/* Right Image */}
-          <div className="flex-1 slide-in-right">
+        <div className="flex-1 slide-in-right">
           <div className="relative w-full max-w-md mx-auto">
             <div className="glass glass-hover rounded-3xl overflow-hidden neon-pulse">
               <Image

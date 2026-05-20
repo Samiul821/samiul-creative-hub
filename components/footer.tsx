@@ -22,6 +22,20 @@ interface QuickLink {
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
+  // ✅ Smart email handler
+  const handleEmailClick = () => {
+    const email = "support.samiul.islam@gmail.com";
+
+    const isMobile =
+      /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    const url = isMobile
+      ? `mailto:${email}`
+      : `https://mail.google.com/mail/?view=cm&fs=1&to=${email}`;
+
+    window.open(url, "_blank");
+  };
+
   const socialLinks: SocialLink[] = [
     {
       icon: CiFacebook,
@@ -40,7 +54,7 @@ export default function Footer() {
     },
     {
       icon: FaEnvelope,
-      href: "mailto:support.samiul.islam@gmail.com",
+      href: "#",
       label: "Email",
     },
   ];
@@ -70,6 +84,21 @@ export default function Footer() {
             <div className="flex gap-4">
               {socialLinks.map((social) => {
                 const Icon = social.icon;
+
+                // ✅ Email special click
+                if (social.label === "Email") {
+                  return (
+                    <button
+                      key={social.label}
+                      onClick={handleEmailClick}
+                      className="p-2 glass glass-hover rounded-lg text-primary hover:text-secondary transition-colors"
+                      title={social.label}
+                    >
+                      <Icon size={20} />
+                    </button>
+                  );
+                }
+
                 return (
                   <a
                     key={social.label}
@@ -106,15 +135,16 @@ export default function Footer() {
           {/* Contact Info */}
           <div>
             <h4 className="font-bold text-foreground mb-4">Get In Touch</h4>
+
             <p className="text-foreground/70 mb-3">
               <span className="font-semibold text-foreground">Email:</span>
               <br />
-              <a
-                href="mailto:support.samiul.islam@gmail.com"
-                className="hover:text-primary transition-colors"
+              <button
+                onClick={handleEmailClick}
+                className="hover:text-primary transition-colors text-left"
               >
                 support.samiul.islam@gmail.com
-              </a>
+              </button>
             </p>
 
             <p className="text-foreground/70">
