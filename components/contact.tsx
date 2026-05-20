@@ -72,7 +72,7 @@ export default function Contact() {
       icon: Mail,
       label: "Email",
       value: "support.samiul.islam@gmail.com",
-      href: "mailto:support.samiul.islam@gmail.com",
+      href: "support.samiul.islam@gmail.com",
     },
     {
       icon: MessageCircle,
