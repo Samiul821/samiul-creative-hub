@@ -21,7 +21,8 @@ interface ContactChannel {
   icon: LucideIcon;
   label: string;
   value: string;
-  href: string;
+  href?: string;
+  onClick?: () => void;
 }
 
 export default function Contact() {
@@ -36,7 +37,6 @@ export default function Contact() {
 
   const onSubmit = async (data: FormData) => {
     try {
-      // 1️⃣ Send to API (Email)
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: {
@@ -47,7 +47,6 @@ export default function Contact() {
 
       if (!res.ok) throw new Error("Failed to send message");
 
-      // 2️⃣ WhatsApp open
       const phone = "8801330624539";
 
       const whatsappMessage = `Name: ${data.name}%0AEmail: ${data.email}%0ASubject: ${data.subject}%0AMessage: ${data.message}`;
@@ -56,7 +55,6 @@ export default function Contact() {
 
       window.open(whatsappURL, "_blank");
 
-      // 3️⃣ UI update
       setSubmitted(true);
       reset();
 
@@ -67,12 +65,26 @@ export default function Contact() {
     }
   };
 
+  // ✅ Smart Email handler (Mobile = Gmail app, PC = Gmail web)
+  const handleEmailClick = () => {
+    const email = "support.samiul.islam@gmail.com";
+
+    const isMobile =
+      /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    const url = isMobile
+      ? `mailto:${email}`
+      : `https://mail.google.com/mail/?view=cm&fs=1&to=${email}`;
+
+    window.open(url, "_blank");
+  };
+
   const contactChannels: ContactChannel[] = [
     {
       icon: Mail,
       label: "Email",
       value: "support.samiul.islam@gmail.com",
-      href: "support.samiul.islam@gmail.com",
+      onClick: handleEmailClick,
     },
     {
       icon: MessageCircle,
@@ -94,7 +106,7 @@ export default function Contact() {
       className="py-20 bg-background relative overflow-hidden"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+        {/* HEADER */}
         <div className="text-center mb-16 fade-up">
           <h2 className="text-4xl sm:text-5xl font-bold mb-6">
             Let's Work{" "}
@@ -159,7 +171,22 @@ export default function Contact() {
           <div className="flex flex-col gap-6">
             {contactChannels.map((channel, index) => {
               const Icon = channel.icon;
-              return (
+
+              return channel.onClick ? (
+                <div
+                  key={index}
+                  onClick={channel.onClick}
+                  className="cursor-pointer glass glass-hover rounded-2xl p-6 flex items-center gap-4"
+                >
+                  <Icon className="text-primary" size={24} />
+                  <div>
+                    <h4 className="font-bold">{channel.label}</h4>
+                    <p className="text-sm text-foreground/70">
+                      {channel.value}
+                    </p>
+                  </div>
+                </div>
+              ) : (
                 <a
                   key={index}
                   href={channel.href}
