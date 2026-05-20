@@ -1,9 +1,15 @@
-'use client';
+"use client";
 
-import { Facebook, Instagram, Linkedin, Mail, Heart, LucideIcon } from 'lucide-react';
+import { IconType } from "react-icons";
+import {
+  CiFacebook,
+  CiInstagram,
+  CiLinkedin,
+} from "react-icons/ci";
+import { FaEnvelope } from "react-icons/fa";
 
 interface SocialLink {
-  icon: LucideIcon;
+  icon: IconType;
   href: string;
   label: string;
 }
@@ -17,18 +23,34 @@ export default function Footer(): JSX.Element {
   const currentYear = new Date().getFullYear();
 
   const socialLinks: SocialLink[] = [
-    { icon: Facebook, href: 'https://www.facebook.com/md.samiul.islam.work', label: 'Facebook' },
-    { icon: Instagram, href: 'https://www.instagram.com/md.samiul.islam.official/', label: 'Instagram' },
-    { icon: Linkedin, href: 'https://www.linkedin.com/in/md-samiul-islam890', label: 'LinkedIn' },
-    { icon: Mail, href: 'mailto:support.samiul.islam@gmail.com', label: 'Email' },
+    {
+      icon: CiFacebook,
+      href: "https://www.facebook.com/md.samiul.islam.work",
+      label: "Facebook",
+    },
+    {
+      icon: CiInstagram,
+      href: "https://www.instagram.com/md.samiul.islam.official/",
+      label: "Instagram",
+    },
+    {
+      icon: CiLinkedin,
+      href: "https://www.linkedin.com/in/md-samiul-islam890",
+      label: "LinkedIn",
+    },
+    {
+      icon: FaEnvelope,
+      href: "mailto:support.samiul.islam@gmail.com",
+      label: "Email",
+    },
   ];
 
   const quickLinks: QuickLink[] = [
-    { label: 'Home', href: '#' },
-    { label: 'About', href: '#about' },
-    { label: 'Services', href: '#services' },
-    { label: 'Portfolio', href: '#portfolio' },
-    { label: 'Contact', href: '#contact' },
+    { label: "Home", href: "#" },
+    { label: "About", href: "#about" },
+    { label: "Services", href: "#services" },
+    { label: "Portfolio", href: "#portfolio" },
+    { label: "Contact", href: "#contact" },
   ];
 
   return (
@@ -41,8 +63,10 @@ export default function Footer(): JSX.Element {
               MSI
             </div>
             <p className="text-foreground/70 mb-6">
-              Social Media Manager & Digital Marketer helping brands grow through creative strategy.
+              Social Media Manager & Digital Marketer helping brands grow
+              through creative strategy.
             </p>
+
             <div className="flex gap-4">
               {socialLinks.map((social) => {
                 const Icon = social.icon;
@@ -85,10 +109,14 @@ export default function Footer(): JSX.Element {
             <p className="text-foreground/70 mb-3">
               <span className="font-semibold text-foreground">Email:</span>
               <br />
-              <a href="mailto:support.samiul.islam@gmail.com" className="hover:text-primary transition-colors">
+              <a
+                href="mailto:support.samiul.islam@gmail.com"
+                className="hover:text-primary transition-colors"
+              >
                 support.samiul.islam@gmail.com
               </a>
             </p>
+
             <p className="text-foreground/70">
               <span className="font-semibold text-foreground">Based in:</span>
               <br />
@@ -97,13 +125,11 @@ export default function Footer(): JSX.Element {
           </div>
         </div>
 
-        {/* Divider */}
         <div className="border-t border-border mb-8" />
 
-        {/* Copyright */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-foreground/60 text-sm flex items-center gap-2">
-            Made with <Heart size={16} className="text-primary fill-primary" /> by Md Samiul Islam
+            Made with ❤️ by Md Samiul Islam
           </p>
           <p className="text-foreground/60 text-sm">
             © {currentYear} Md Samiul Islam. All rights reserved.
